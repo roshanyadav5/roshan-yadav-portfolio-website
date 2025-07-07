@@ -11,6 +11,52 @@
     body {
       font-family: 'Inter', sans-serif;
     }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s ease, transform 1s cubic-bezier(.4,0,.2,1);
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: none;
+    }
+    /* Marquee effect for tech-stack */
+    .marquee {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      background: #1e293b;
+      padding: 1rem 0;
+    }
+    .marquee-content {
+      display: flex;
+      gap: 1rem;
+      animation: marquee 18s linear infinite;
+      will-change: transform;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    /* Duplicate for seamless loop */
+    .marquee-content > * {
+      flex: 0 0 auto;
+    }
+    /* Button and hero image subtle animation */
+    .btn-primary, .btn-outline {
+      transition: transform 0.2s cubic-bezier(.4,0,.2,1), box-shadow 0.2s;
+    }
+    .btn-primary:hover, .btn-outline:hover {
+      transform: scale(1.06);
+      box-shadow: 0 4px 24px rgba(239,68,68,0.15);
+    }
+    .hero-image img {
+      transition: transform 0.5s cubic-bezier(.4,0,.2,1), box-shadow 0.5s;
+    }
+    .hero-image img:hover {
+      transform: scale(1.04) rotate(-2deg);
+      box-shadow: 0 0 40px 10px rgba(239,68,68,0.25);
+    }
   </style>
 </head>
 
@@ -28,7 +74,7 @@
   </header>
 
   <!-- Hero Section -->
-  <section class="hero">
+  <section class="hero fade-in">
     <div class="hero-text">
       <p>Hello<span class="dot">.</span></p>
       <h2>I'm Roshan</h2>
@@ -45,16 +91,20 @@
 
 
   <!-- Tech Stack -->
-  <div class="tech-stack">
-    
+  <div class="marquee fade-in">
+    <div class="marquee-content">
       {% for skill in skills %}
-      {% include 'skill.html' %}
-      {%endfor%}
+        {% include 'skill.html' %}
+      {% endfor %}
+      {% for skill in skills %}
+        {% include 'skill.html' %}
+      {% endfor %}
     </div>
+  </div>
 
 
   <!-- About Me -->
-  <section id="about" class="about">
+  <section id="about" class="about fade-in">
     <div class="about-services">
       <div class="service">💻 Website Development</div>
       <div class="service">📱 App Development</div>
@@ -85,9 +135,31 @@
   </section>
 
   <!-- Footer -->
-  <footer class="footer">
+  <footer class="footer fade-in">
     &copy; 2025 Roshan Yadav. All rights reserved.
   </footer>
-</body>
 
+  <script>
+    // Fade-in on load
+    window.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.fade-in').forEach(el => {
+        setTimeout(() => el.classList.add('visible'), 100);
+      });
+    });
+
+    // Scroll reveal
+    function revealOnScroll() {
+      const reveals = document.querySelectorAll('.fade-in');
+      const windowHeight = window.innerHeight;
+      reveals.forEach(el => {
+        const top = el.getBoundingClientRect().top;
+        if (top < windowHeight - 80) {
+          el.classList.add('visible');
+        }
+      });
+    }
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll();
+  </script>
+</body>
 </html>

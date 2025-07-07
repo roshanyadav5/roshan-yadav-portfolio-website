@@ -14,7 +14,7 @@ Skills=[
 @app.route('/')
 
 def homePage():
-    return render_template('index.html')
+    return render_template('index.html',skills=Skills)
 
 
 
