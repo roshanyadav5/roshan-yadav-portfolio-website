@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roshan Yadav - Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <h1>Roshan Yadav</h1>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <p>Hello<span class="dot">.</span></p>
+      <h2>I'm Roshan</h2>
+      <h3>Data Scientist && Web Developer</h3>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn-primary">Got a project?</a>
+        <a href="#" class="btn-outline">My resume</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="http://127.0.0.1:5000/static/images/roshan.png" alt="Roshan" />
+    </div>
+  </section>
+
+
+  <!-- Tech Stack -->
+  <div class="tech-stack">
+    
+      {% for skill in skills %}
+      {% include 'skill.html' %}
+      {%endfor%}
+    </div>
+
+
+  <!-- About Me -->
+  <section id="about" class="about">
+    <div class="about-services">
+      <div class="service">💻 Website Development</div>
+      <div class="service">📱 App Development</div>
+      <div class="service">☁️ Website Hosting</div>
+    </div>
+    <div class="about-text">
+      <h2>About me</h2>
+      <p>
+        I started my software journey from photography. Through that, I learned to love the process of creating from
+        scratch. Since then, this has led me to software development as it fulfills my love for learning and building
+        things.
+      </p>
+      <div class="about-stats">
+        <div>
+          <p class="stat-number">120+</p>
+          <p>Completed Projects</p>
+        </div>
+        <div>
+          <p class="stat-number">95%</p>
+          <p>Client satisfaction</p>
+        </div>
+        <div>
+          <p class="stat-number">10+</p>
+          <p>Years of experience</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    &copy; 2025 Roshan Yadav. All rights reserved.
+  </footer>
+</body>
+
+</html>
